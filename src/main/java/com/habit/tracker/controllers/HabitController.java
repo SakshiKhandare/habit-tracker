@@ -40,4 +40,17 @@ public class HabitController {
         URI location = URI.create("/api/habits/" + created.getId());
         return ResponseEntity.created(location).body(created);
     }
+
+/*
+   GET /api/habits/{id}
+   - Fetch a single habit by its id.
+   - Returns 200 OK with HabitResponse if found.
+   - Returns 404 Not Found if id does not exist (handled by GlobalExceptionHandler).
+*/
+
+    @GetMapping("/{id}")
+    public ResponseEntity<HabitResponse> getHabitById(@PathVariable Long id){
+        HabitResponse habit = habitService.getHabitById(id);
+        return ResponseEntity.ok(habit);
+    }
 }

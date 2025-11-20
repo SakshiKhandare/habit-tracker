@@ -16,5 +16,7 @@ public interface HabitService {
      * - Returns the created HabitResponse containing id, createdAt, etc.
      */
     HabitResponse createHabit(CreateHabitRequest request);
+
+    HabitResponse getHabitById(Long id);
 }
 

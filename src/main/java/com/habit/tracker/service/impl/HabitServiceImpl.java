@@ -1,5 +1,7 @@
 package com.habit.tracker.service.impl;
 
+import com.habit.tracker.exception.HabitNotFoundException;
+
 import com.habit.tracker.dto.CreateHabitRequest;
 import com.habit.tracker.dto.HabitResponse;
 import com.habit.tracker.mapper.HabitMapper;
@@ -37,5 +39,13 @@ public class HabitServiceImpl implements HabitService {
 
         // Map Entity -> Response DTO
         return HabitMapper.toResponse(saved);
+    }
+
+    @Override
+    public HabitResponse getHabitById(Long id) {
+        Habit habit = habitRepository.findById(id)
+                .orElseThrow(() -> new HabitNotFoundException("Habit not found with id: "+id));
+
+        return HabitMapper.toResponse(habit);
     }
 }
