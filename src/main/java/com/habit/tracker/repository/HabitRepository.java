@@ -3,9 +3,7 @@ package com.habit.tracker.repository;
 import com.habit.tracker.model.Habit;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
-
-public interface HabitRepository extends JpaRepository<Habit, UUID> {
+public interface HabitRepository extends JpaRepository<Habit, Long> {
 }
 
 /*
@@ -16,19 +14,19 @@ public interface HabitRepository extends JpaRepository<Habit, UUID> {
 */
 
 /*
-  <Habit, UUID> here means:
+  <Habit, Long> here means:
   - Habit → the entity this repository manages.
-  - UUID  → the type of the primary key (id) of the Habit entity.
+  - Long  → the type of the primary key (id) of the Habit entity.
   JPA uses these types to know what table to work with and what the ID type is.
 */
 
 /*
-  JpaRepository<Habit, UUID>
+  JpaRepository<Habit, Long>
 
   NOTE:
   - The two generic types <Entity, IdType> are MANDATORY.
   - Entity  → the JPA @Entity class this repository manages (Habit).
-  - IdType  → the Java type of the primary key (@Id field) in that entity (UUID).
+  - IdType  → the Java type of the primary key (@Id field) in that entity (Long).
 
   Why this is required:
   - Spring Data uses the Entity type to know which table to work with.

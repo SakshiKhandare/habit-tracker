@@ -13,7 +13,7 @@ import java.util.UUID;
 */
 public class HabitResponse {
 
-    private UUID id;
+    private Long id;
     private String title;
     private String description;
     private Frequency frequency;
@@ -21,11 +21,11 @@ public class HabitResponse {
     private Instant createdAt;
     private Instant updatedAt;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

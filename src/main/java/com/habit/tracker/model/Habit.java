@@ -10,8 +10,8 @@ import java.util.UUID;
 public class Habit {
 
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
 
@@ -25,11 +25,11 @@ public class Habit {
     private Instant createdAt = Instant.now();
     private Instant updatedAt = Instant.now();
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
