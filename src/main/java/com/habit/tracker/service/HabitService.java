@@ -3,6 +3,8 @@ package com.habit.tracker.service;
 import com.habit.tracker.dto.CreateHabitRequest;
 import com.habit.tracker.dto.HabitResponse;
 
+import java.util.List;
+
 /*
   HabitService
   - Business API for Habit operations.
@@ -18,5 +20,7 @@ public interface HabitService {
     HabitResponse createHabit(CreateHabitRequest request);
 
     HabitResponse getHabitById(Long id);
+
+    List<HabitResponse> getAllHabits();
 }
 

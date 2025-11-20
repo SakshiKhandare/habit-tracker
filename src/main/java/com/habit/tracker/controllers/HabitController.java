@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 /*
   HabitController
@@ -52,5 +53,17 @@ public class HabitController {
     public ResponseEntity<HabitResponse> getHabitById(@PathVariable Long id){
         HabitResponse habit = habitService.getHabitById(id);
         return ResponseEntity.ok(habit);
+    }
+
+/*
+   GET /api/habits
+   - Returns a list of all habits
+   - 200 OK with List<HabitResponse>
+*/
+
+    @GetMapping
+    public ResponseEntity<List<HabitResponse>> getAllHabits(){
+        List<HabitResponse> habits = habitService.getAllHabits();
+        return ResponseEntity.ok(habits);
     }
 }

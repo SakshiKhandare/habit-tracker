@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 @Transactional
@@ -48,4 +49,31 @@ public class HabitServiceImpl implements HabitService {
 
         return HabitMapper.toResponse(habit);
     }
+
+    @Override
+    public List<HabitResponse> getAllHabits() {
+        // Fetch all Habit entities from the database
+        List<Habit> habits = habitRepository.findAll();
+
+        return habits.stream()
+                .map(HabitMapper::toResponse)
+                .toList();
+    }
+/*
+Convert List<Habit> -> List<HabitResponse>
+
+1. habits.stream()
+   - Turns the list of Habit entities into a stream so we can process each item.
+
+2. .map(HabitMapper::toResponse)
+   - For every Habit entity in the stream, call HabitMapper.toResponse().
+   - This transforms:
+        Habit (entity)  --->  HabitResponse (DTO)
+
+3. .toList()
+   - Collect all the converted HabitResponse objects back into a List.
+
+Final result:
+A List<HabitResponse> that the controller can return to the client.
+*/
 }
