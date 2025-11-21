@@ -55,6 +55,7 @@ public class HabitMapper {
         resp.setCreatedAt(entity.getCreatedAt());
         resp.setUpdatedAt(entity.getUpdatedAt());
 
+        resp.setCompleted(entity.isCompleted());
         return resp;
     }
 }

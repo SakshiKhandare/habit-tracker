@@ -36,5 +36,9 @@ public interface HabitService {
     List<HabitResponse> getHabitsByFrequency(Frequency frequency);
 
     Page<HabitResponse> getHabits(Frequency frequency, int page, int size);
+
+    HabitResponse completeHabit(Long id);
+
+    HabitResponse markHabitIncomplete(Long id);
 }
 

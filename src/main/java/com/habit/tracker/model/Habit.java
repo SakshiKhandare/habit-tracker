@@ -22,6 +22,8 @@ public class Habit {
 
     private LocalDate startDate;
 
+    private boolean completed = false;
+
     private Instant createdAt = Instant.now();
     private Instant updatedAt = Instant.now();
 
@@ -79,5 +81,13 @@ public class Habit {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

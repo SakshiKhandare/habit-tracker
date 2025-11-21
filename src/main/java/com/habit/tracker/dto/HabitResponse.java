@@ -20,6 +20,7 @@ public class HabitResponse {
     private String startDate;
     private Instant createdAt;
     private Instant updatedAt;
+    private boolean completed;
 
     public Long getId() {
         return id;
@@ -75,5 +76,13 @@ public class HabitResponse {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

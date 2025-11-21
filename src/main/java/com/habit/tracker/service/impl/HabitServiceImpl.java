@@ -158,4 +158,32 @@ public class HabitServiceImpl implements HabitService {
         return habitsPage.map(HabitMapper::toResponse);
     }
 
+    @Override
+    public HabitResponse completeHabit(Long id) {
+
+        Habit existingHabit = habitRepository.findById(id)
+                .orElseThrow(() -> new HabitNotFoundException("Habit not found with id: "+id));
+
+        existingHabit.setCompleted(true);
+        existingHabit.setUpdatedAt(Instant.now());
+
+        Habit saved = habitRepository.save(existingHabit);
+
+        return HabitMapper.toResponse(saved);
+    }
+
+    @Override
+    public HabitResponse markHabitIncomplete(Long id) {
+
+        Habit existingHabit = habitRepository.findById(id)
+                .orElseThrow(() -> new HabitNotFoundException("Habit not found with id: "+id));
+
+        existingHabit.setCompleted(false);
+        existingHabit.setUpdatedAt(Instant.now());
+
+        Habit saved = habitRepository.save(existingHabit);
+
+        return HabitMapper.toResponse(saved);
+    }
+
 }

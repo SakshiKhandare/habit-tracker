@@ -108,4 +108,23 @@ public class HabitController {
         HabitResponse updated = habitService.patchHabit(id, request);
         return ResponseEntity.ok(updated);
     }
+
+/*
+   POST /api/habits/{id}/complete
+   POST /api/habits/{id}/incomplete
+   - Marks habit completed or not completed.
+   - Returns 200 OK with the updated HabitResponse.
+*/
+
+    @PostMapping("/{id}/complete")
+    public ResponseEntity<HabitResponse> completeHabit(@PathVariable Long id){
+        HabitResponse updated = habitService.completeHabit(id);
+        return ResponseEntity.ok(updated);
+    }
+
+    @PostMapping("/{id}/incomplete")
+    public ResponseEntity<HabitResponse> markHabitIncomplete(@PathVariable Long id){
+        HabitResponse updated = habitService.markHabitIncomplete(id);
+        return ResponseEntity.ok(updated);
+    }
 }
