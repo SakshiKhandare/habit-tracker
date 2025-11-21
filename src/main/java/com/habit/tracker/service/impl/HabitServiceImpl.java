@@ -1,5 +1,6 @@
 package com.habit.tracker.service.impl;
 
+import com.habit.tracker.dto.PatchHabitRequest;
 import com.habit.tracker.dto.UpdateHabitRequest;
 import com.habit.tracker.exception.HabitNotFoundException;
 
@@ -92,6 +93,39 @@ public class HabitServiceImpl implements HabitService {
                 .orElseThrow(() -> new HabitNotFoundException("Habit not found with id: "+id));
 
         habitRepository.delete(habit);
+    }
+
+    @Override
+    public HabitResponse patchHabit(Long id, PatchHabitRequest request) {
+
+        Habit existingHabit = habitRepository.findById(id)
+                .orElseThrow(() -> new HabitNotFoundException("Habit not found with id: "+id));
+
+        // Update only provided fields
+
+        if(request.getTitle() != null)
+            existingHabit.setTitle(request.getTitle());
+
+        if(request.getDescription() != null)
+            existingHabit.setDescription(request.getDescription());
+
+        if(request.getFrequency() != null)
+            existingHabit.setFrequency(request.getFrequency());
+
+        if(request.getStartDate() != null){
+            if (!request.getStartDate().isBlank()) {
+                existingHabit.setStartDate(LocalDate.parse(request.getStartDate()));
+            } else {
+                existingHabit.setStartDate(null); // blank means clear
+            }
+        }
+
+        // Always update updatedAt
+        existingHabit.setUpdatedAt(Instant.now());
+
+        Habit saved = habitRepository.save(existingHabit);
+
+        return HabitMapper.toResponse(saved);
     }
 
 }

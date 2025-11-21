@@ -2,6 +2,7 @@ package com.habit.tracker.controllers;
 
 import com.habit.tracker.dto.CreateHabitRequest;
 import com.habit.tracker.dto.HabitResponse;
+import com.habit.tracker.dto.PatchHabitRequest;
 import com.habit.tracker.dto.UpdateHabitRequest;
 import com.habit.tracker.service.HabitService;
 import jakarta.validation.Valid;
@@ -89,5 +90,14 @@ public class HabitController {
     public ResponseEntity<Void> deleteHabit(@PathVariable Long id){
         habitService.deleteHabit(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<HabitResponse> patchHabit(
+            @PathVariable Long id,
+            @RequestBody PatchHabitRequest request
+            ){
+        HabitResponse updated = habitService.patchHabit(id, request);
+        return ResponseEntity.ok(updated);
     }
 }
