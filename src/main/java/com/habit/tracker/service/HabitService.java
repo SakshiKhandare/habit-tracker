@@ -4,6 +4,7 @@ import com.habit.tracker.dto.CreateHabitRequest;
 import com.habit.tracker.dto.HabitResponse;
 import com.habit.tracker.dto.PatchHabitRequest;
 import com.habit.tracker.dto.UpdateHabitRequest;
+import com.habit.tracker.model.Frequency;
 
 import java.util.List;
 
@@ -30,5 +31,7 @@ public interface HabitService {
     void deleteHabit(Long id);
 
     HabitResponse patchHabit(Long id, PatchHabitRequest request);
+
+    List<HabitResponse> getHabitsByFrequency(Frequency frequency);
 }
 

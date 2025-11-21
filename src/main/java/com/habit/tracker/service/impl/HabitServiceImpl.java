@@ -7,6 +7,7 @@ import com.habit.tracker.exception.HabitNotFoundException;
 import com.habit.tracker.dto.CreateHabitRequest;
 import com.habit.tracker.dto.HabitResponse;
 import com.habit.tracker.mapper.HabitMapper;
+import com.habit.tracker.model.Frequency;
 import com.habit.tracker.model.Habit;
 import com.habit.tracker.repository.HabitRepository;
 import com.habit.tracker.service.HabitService;
@@ -126,6 +127,17 @@ public class HabitServiceImpl implements HabitService {
         Habit saved = habitRepository.save(existingHabit);
 
         return HabitMapper.toResponse(saved);
+    }
+
+    @Override
+    public List<HabitResponse> getHabitsByFrequency(Frequency frequency) {
+        if(frequency == null)
+            return getAllHabits();
+
+        List<Habit> habits = habitRepository.findByFrequency(frequency);
+        return habits.stream()
+                .map(HabitMapper::toResponse)
+                .toList();
     }
 
 }
