@@ -2,6 +2,7 @@ package com.habit.tracker.service;
 
 import com.habit.tracker.dto.CreateHabitRequest;
 import com.habit.tracker.dto.HabitResponse;
+import com.habit.tracker.dto.UpdateHabitRequest;
 
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface HabitService {
     HabitResponse getHabitById(Long id);
 
     List<HabitResponse> getAllHabits();
+
+    HabitResponse updateHabit(Long id, UpdateHabitRequest request);
 }
 

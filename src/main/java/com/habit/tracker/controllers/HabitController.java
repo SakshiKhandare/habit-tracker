@@ -2,6 +2,7 @@ package com.habit.tracker.controllers;
 
 import com.habit.tracker.dto.CreateHabitRequest;
 import com.habit.tracker.dto.HabitResponse;
+import com.habit.tracker.dto.UpdateHabitRequest;
 import com.habit.tracker.service.HabitService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -65,5 +66,22 @@ public class HabitController {
     public ResponseEntity<List<HabitResponse>> getAllHabits(){
         List<HabitResponse> habits = habitService.getAllHabits();
         return ResponseEntity.ok(habits);
+    }
+
+/*
+   PUT /api/habits/{id}
+   - Full update of an existing habit.
+   - All fields must be provided in request body.
+   - If habit doesn't exist -> 404 (handled by GlobalExceptionHandler).
+   - If request invalid -> 400 (validation handler covers this).
+*/
+
+    @PutMapping("/{id}")
+    public ResponseEntity<HabitResponse> updateHabit(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateHabitRequest request
+            ){
+        HabitResponse updated = habitService.updateHabit(id,request);
+        return ResponseEntity.ok(updated);
     }
 }
