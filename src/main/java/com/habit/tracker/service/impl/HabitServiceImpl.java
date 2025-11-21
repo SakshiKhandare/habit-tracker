@@ -85,4 +85,13 @@ public class HabitServiceImpl implements HabitService {
         return HabitMapper.toResponse(saved);
     }
 
+    @Override
+    public void deleteHabit(Long id) {
+
+        Habit habit = habitRepository.findById(id)
+                .orElseThrow(() -> new HabitNotFoundException("Habit not found with id: "+id));
+
+        habitRepository.delete(habit);
+    }
+
 }
