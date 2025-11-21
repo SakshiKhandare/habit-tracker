@@ -2,6 +2,8 @@ package com.habit.tracker.repository;
 
 import com.habit.tracker.model.Frequency;
 import com.habit.tracker.model.Habit;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -10,6 +12,8 @@ public interface HabitRepository extends JpaRepository<Habit, Long> {
 
     // Find habits by frequency (e.g., DAILY or WEEKLY)
     List<Habit> findByFrequency(Frequency frequency);
+
+    Page<Habit> findByFrequency(Frequency frequency, Pageable pageable);
 }
 
 /*

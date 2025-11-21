@@ -5,6 +5,7 @@ import com.habit.tracker.dto.HabitResponse;
 import com.habit.tracker.dto.PatchHabitRequest;
 import com.habit.tracker.dto.UpdateHabitRequest;
 import com.habit.tracker.model.Frequency;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -33,5 +34,7 @@ public interface HabitService {
     HabitResponse patchHabit(Long id, PatchHabitRequest request);
 
     List<HabitResponse> getHabitsByFrequency(Frequency frequency);
+
+    Page<HabitResponse> getHabits(Frequency frequency, int page, int size);
 }
 

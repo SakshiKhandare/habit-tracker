@@ -7,6 +7,7 @@ import com.habit.tracker.dto.UpdateHabitRequest;
 import com.habit.tracker.model.Frequency;
 import com.habit.tracker.service.HabitService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,17 +60,20 @@ public class HabitController {
     }
 
 /*
-   GET /api/habits?frequency=DAILY
-   - If 'frequency' query param is present, filter by it.
-   - If not present, return all habits.
-   - Frequency values: DAILY, WEEKLY
+    GET /api/habits
+    Supports:
+    - filtering by frequency (optional)
+    - pagination (optional)
+      page -> default 0
+      size -> default 10
 */
-
     @GetMapping
-    public ResponseEntity<List<HabitResponse>> getAllHabits(
-            @RequestParam(value = "frequency", required = false) Frequency frequency
+    public ResponseEntity<Page<HabitResponse>> getAllHabits(
+            @RequestParam(value = "frequency", required = false) Frequency frequency,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
     ){
-        List<HabitResponse> habits = habitService.getHabitsByFrequency(frequency);
+        Page<HabitResponse> habits = habitService.getHabits(frequency, page, size);
         return ResponseEntity.ok(habits);
     }
 

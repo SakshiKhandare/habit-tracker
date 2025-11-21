@@ -12,6 +12,9 @@ import com.habit.tracker.model.Habit;
 import com.habit.tracker.repository.HabitRepository;
 import com.habit.tracker.service.HabitService;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -138,6 +141,21 @@ public class HabitServiceImpl implements HabitService {
         return habits.stream()
                 .map(HabitMapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public Page<HabitResponse> getHabits(Frequency frequency, int page, int size) {
+        Pageable pageable = PageRequest.of(Math.max(0, page), Math.max(1,size));
+
+        Page<Habit> habitsPage;
+
+        if(frequency == null){
+            habitsPage = habitRepository.findAll(pageable);
+        } else{
+            habitsPage = habitRepository.findByFrequency(frequency, pageable);
+        }
+
+        return habitsPage.map(HabitMapper::toResponse);
     }
 
 }
